@@ -18,6 +18,8 @@ package com.bhatworks.android.slidingtab;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -76,17 +78,18 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private SparseArray<String> mContentDescriptions = new SparseArray<>();
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
+    @NonNull
     private final SlidingTabStrip mTabStrip;
 
-    public SlidingTabLayout(Context context) {
+    public SlidingTabLayout(@NonNull Context context) {
         this(context, null);
     }
 
-    public SlidingTabLayout(Context context, AttributeSet attrs) {
+    public SlidingTabLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
+    public SlidingTabLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         // Disable the Scroll Bar
@@ -180,6 +183,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
         textView.setPadding(padding, padding, padding, padding);
+
+        if (mTabColor != null) {
+            textView.setTextColor(mTabColor);
+        }
 
         return textView;
     }
