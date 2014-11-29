@@ -1,5 +1,6 @@
 <resources>
     <declare-styleable name="SlidingTabStrip">
         <attr name="indicatorColor" format="color|reference"/>
+        <attr name="textColor" format="color|reference"/>
     </declare-styleable>
 </resources>

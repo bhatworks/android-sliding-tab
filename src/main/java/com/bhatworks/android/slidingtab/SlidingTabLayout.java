@@ -17,8 +17,10 @@
 package com.bhatworks.android.slidingtab;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -74,6 +76,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private int mTabViewLayoutId;
     private int mTabViewTextViewId;
     private boolean mDistributeEvenly;
+    private ColorStateList mTabColor;
 
     private ViewPager mViewPager;
     private SparseArray<String> mContentDescriptions = new SparseArray<>();
@@ -114,6 +117,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 if (indicatorColor != 0) {
                     setSelectedIndicatorColors(new int[]{indicatorColor});
                 }
+                final ColorStateList textColor = a.getColorStateList(
+                        R.styleable.SlidingTabStrip_textColor);
+                if (textColor != null) {
+                    setTextColor(textColor);
+                }
             } finally {
                 a.recycle();
             }
@@ -142,6 +150,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
      */
     public void setSelectedIndicatorColors(int[] colors) {
         mTabStrip.setSelectedIndicatorColors(colors);
+    }
+
+    /**
+     * Sets the color to be used for the tab text color.
+     */
+    public void setTextColor(@ColorRes ColorStateList tabColor) {
+        mTabColor = tabColor;
     }
 
     /**
