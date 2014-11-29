@@ -17,6 +17,7 @@
 package com.bhatworks.android.slidingtab;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -101,6 +102,22 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         mTabStrip = new SlidingTabStrip(context);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+
+        if (attrs != null) {
+            TypedArray a = context.getTheme().obtainStyledAttributes(
+                    attrs,
+                    R.styleable.SlidingTabStrip,
+                    0, 0);
+            try {
+                final int indicatorColor = a.getColor(
+                        R.styleable.SlidingTabStrip_indicatorColor, 0);
+                if (indicatorColor != 0) {
+                    setSelectedIndicatorColors(new int[]{indicatorColor});
+                }
+            } finally {
+                a.recycle();
+            }
+        }
     }
 
     /**
