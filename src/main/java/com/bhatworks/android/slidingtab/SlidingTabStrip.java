@@ -44,6 +44,8 @@ class SlidingTabStrip extends LinearLayout {
     private SlidingTabLayout.TabColorizer mCustomTabColorizer;
     private final SimpleTabColorizer mDefaultTabColorizer;
 
+    private final int mSelectedIndicatorBottomSpacing;
+
     SlidingTabStrip(Context context) {
         this(context, null);
     }
@@ -70,6 +72,7 @@ class SlidingTabStrip extends LinearLayout {
 
         mSelectedIndicatorThickness = (int) (SELECTED_INDICATOR_THICKNESS_DIPS * density);
         mSelectedIndicatorPaint = new Paint();
+        mSelectedIndicatorBottomSpacing = (int) (1/*dp*/ * density + 0.5f);
     }
 
     void setCustomTabColorizer(SlidingTabLayout.TabColorizer customTabColorizer) {
@@ -121,8 +124,10 @@ class SlidingTabStrip extends LinearLayout {
 
             mSelectedIndicatorPaint.setColor(color);
 
-            canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
-                    height, mSelectedIndicatorPaint);
+            // the selected indicator should have a 1dp
+            int bottom = height - mSelectedIndicatorBottomSpacing;
+            canvas.drawRect(left, bottom - mSelectedIndicatorThickness, right,
+                    bottom, mSelectedIndicatorPaint);
         }
 
         // Thin underline along the entire bottom edge
